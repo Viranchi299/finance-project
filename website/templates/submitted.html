@@ -1,0 +1,20 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<div class="jumbotron">
+  <h1 class="display-4">Submitted</h1>
+  <p class="lead">post-processed stuff goes here</p>
+</div>
+
+<div class="alert alert-dark" role="alert">
+  <h1>User selected variables:</h1>
+</div>
+
+<ul>
+  <!-- For loop logic of jinja template -->
+  {%for i in range(0, length)%}
+
+  <li>{{output[i]}}</li>
+  {%endfor%}
+</ul>
+
+{% endblock %}

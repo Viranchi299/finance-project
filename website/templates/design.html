@@ -1,0 +1,165 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<div class="jumbotron">
+  <h1 class="display-4">Design Module</h1>
+  <p class="lead">where the work gets done.</p>
+</div>
+
+<div class="alert alert-dark" role="alert">
+  <h1>Input RAM Concept files</h1>
+</div>
+
+<form method="POST" action="/upload">
+  <div class="form-group">
+    <label for="exampleFormControlFile1"><h5>Column Elements</h5></label>
+    <input
+      type="file"
+      class="form-control-file"
+      name="ram_files"
+      id="col_elem"
+      multiple
+    />
+    <button type="submit" class="btn btn-primary" style="margin-top: 5px">
+      click to upload
+    </button>
+  </div>
+</form>
+
+<select class="custom-select" size="3">
+  <option selected>Open this select menu</option>
+  <option value="1">One</option>
+  <option value="2">Two</option>
+  <option value="3">Three</option>
+</select>
+
+<!-- <form method="POST">
+  <div class="form-group">
+    <label for="exampleFormControlFile1"><h5>Wall Elements</h5></label>
+    <input type="file" class="form-control-file" id="wall_elem">
+  </div>
+</form>
+
+<form method="POST">
+  <div class="form-group">
+    <label for="exampleFormControlFile1"><h5>Wall Mesh</h5></label>
+    <input type="file" class="form-control-file" id="wall_mesh">
+  </div>
+</form>
+
+<form method="POST">
+  <div class="form-group">
+    <label for="exampleFormControlFile1"><h5>Design Section</h5></label>
+    <input type="file" class="form-control-file" id="ds">
+  </div>
+</form>
+
+<form method="POST">
+  <div class="form-group">
+    <label for="exampleFormControlFile1"><h5>Latitude Design Strips</h5></label>
+    <input type="file" class="form-control-file" id="lat_design_strips">
+  </div>
+</form>
+
+<form method="POST">
+  <div class="form-group">
+    <label for="exampleFormControlFile1"><h5>Longitude Design Strips</h5></label>
+    <input type="file" class="form-control-file" id="long_design_strips">
+  </div>
+</form> -->
+
+<br />
+<div class="alert alert-dark" role="alert">
+  <h1>Other inputs</h1>
+</div>
+<br />
+
+<!-- <form method="POST" action="/submitted">
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="options" id="metric" value="metric">
+  <label class="form-check-label" for="inlineRadio1">metric</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="options" id="metric" value="imperial">
+  <label class="form-check-label" for="inlineRadio2">imperial</label>
+</div>
+<div align="center">
+  <button type="submit" class="btn btn-primary">submit unit</button>
+</div>
+</form>
+
+<form method="POST" action="/submitted">
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="options2" id="metric" value="metric">
+      <label class="form-check-label" for="inlineRadio1">metric</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="options2" id="metric" value="imperial">
+      <label class="form-check-label" for="inlineRadio2">imperial</label>
+    </div>
+    <div align="center">
+      <button type="submit" class="btn btn-primary">submit unit</button>
+    </div>
+</form> -->
+
+<form method="POST" action="/submitted">
+  <h4>Units</h4>
+  <input type="radio" name="unit" value="metric" /> Metricccc<br />
+  <input type="radio" name="unit" value="imperial" /> Imperial<br />
+  <br />
+
+  <h4>Top Rebar Size (if uniform)</h4>
+  <input type="radio" name="rebar-size" value="15M" /> 15M<br />
+  <input type="radio" name="rebar-size" value="20M" /> 20M<br />
+  <input type="radio" name="rebar-size" value="25M" /> 25M<br />
+  <input type="radio" name="rebar-size" value="30M" /> 30M<br />
+  <input type="radio" name="rebar-size" value="35M" /> 35M<br />
+  <br />
+
+  <h4>Scale</h4>
+  <input type="radio" name="scale" value="100" /> 1:100<br />
+  <input type="radio" name="scale" value="200" /> 1:200<br />
+  <input type="radio" name="scale" value="128" /> 3/32" = 1'-0"<br />
+  <input type="radio" name="scale" value="12" /> 1/8" = 1'-0"<br />
+  <input type="radio" name="scale" value="4" /> 1/4" = 1'-0"<br />
+  <br />
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+
+  <h4>Round values to the nearest</h4>
+  <label for="exampleFormControlTextarea1">Example textarea</label>
+  <textarea
+    class="form-control"
+    id="exampleFormControlTextarea1"
+    rows="1"
+  ></textarea>
+
+  <div class="form-check">
+    <input
+      class="form-check-input"
+      type="checkbox"
+      value=""
+      name="textform"
+      id="defaultCheck1"
+    />
+    <label class="form-check-label" for="defaultCheck1">
+      Default checkbox
+    </label>
+  </div>
+</form>
+
+<!-- <form method="POST" action="/submitted">
+  <textarea name="note" id="note" class="form-control"></textarea>
+  <br />
+  <div align="center">
+    <button type="submit" class="btn btn-primary">Add Note</button>
+  </div>
+</form> -->
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+{% endblock %}
