@@ -1,8 +1,13 @@
+import base64
+import io
+
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
 from .models import Note
 from . import db
 import json
+import matplotlib.pyplot as plt
+import mplfinance as mpf
 
 #file stuff
 import os
@@ -42,13 +47,37 @@ def get_ticker():
         # data = pdr.get_data_yahoo("SPY", start="2017-01-01", end="2017-04-30")
         data = pdr.get_data_yahoo(ticker)
 
+        # show this on html template, use DF for plotting.
+        disp_data = data.tail(10)
+
         print("successful")
-        print(data)
+        print(disp_data)
 
-        data_index = data.index
-        print(data_index)    
+        # data_index = data.index
+        # print(data_index)
 
-    return render_template("submittedfinance.html", data=data.to_html(classes=["table-bordered", "table-striped", "table-hover"]))
+        # create image and pass to submitted_finance html template.
+        img = io.BytesIO()
+        plt.figure(figsize=(10, 10))
+        # plt.plot(data.index, data['Close'])
+        # plt.xlabel("date")
+        # plt.ylabel("$ price")
+        mpf.plot(data, type='candle', volume=True,
+                 savefig=img,
+                 title=f'\n{ticker.upper()} Historical Data',
+                 ylabel_lower='Shares\nTraded')
+        plt.title(f'{ticker} Stock Price:')
+
+        plt.savefig(img, format='png')
+        img.seek(0)
+
+        plot_url = base64.b64encode(img.getvalue()).decode()
+
+
+    return render_template("submittedfinance.html",
+                           disp_data=disp_data.to_html(classes=["table-bordered", "table-striped", "table-hover"]),
+                           plot_url=plot_url,
+                           ticker=ticker.upper())
 
 
 
