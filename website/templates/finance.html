@@ -7,13 +7,13 @@
 
 <form method="POST" action="/submittedfinance">
   <div class="form-group">
-    <label for="exampleFormControlTextarea1">Example textarea</label>
-    <textarea
-      class="form-control"
-      id="ticker"
-      rows="1"
-      name="ticker"
-    ></textarea>
+    <label for="exampleFormControlTextarea1" style="font-size:25px">Enter a ticker below:</label>
+      </br>
+    <input type="text" id="ticker" name="ticker" maxlength="4" size="10">
+{#      class="form-control"#}
+{#      id="ticker"#}
+{#      rows="1"#}
+{#      name="ticker"#}
     <button type="submit" class="btn btn-primary">Submit</button>
   </div>
 </form>

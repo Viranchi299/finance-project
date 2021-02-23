@@ -1,22 +1,6 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content %}
+{% extends "base.html" %} {% block title %}Home{% endblock %}
 
-    <!-- Write HTML code here -->
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <title>{{ ticker }} Data </title>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        {#    <link#}
-        {#      rel="stylesheet"#}
-        {#      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"#}
-        {#    />#}
-        {#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>#}
-        {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>#}
-        {#    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>#}
-        {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>#}
-    </head>
-    <body>
+{% block content %}
     <canvas id="myChart" width="400" height="150"></canvas>
     <div class="container">
         <h3>{{ ticker }} Trailing 2 Weeks Trading Data </h3>
@@ -28,8 +12,5 @@
     </div>
     <br/>
     <br/>
-
-    </body>
-    </html>
 
 {% endblock %}
