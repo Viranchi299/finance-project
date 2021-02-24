@@ -79,9 +79,8 @@ def get_ticker():
              savefig=img,
              title=f'\n{ticker.upper()} Historical Data',
              ylabel_lower='Shares\nTraded')
-    plt.title(f'{ticker} Stock Price:')
-
-    plt.savefig(img, format='png')
+    # plt.title(f'{ticker} Stock Price:')
+    # plt.savefig(img, format='png')
     img.seek(0)
     plot_url = base64.b64encode(img.getvalue()).decode()
 
