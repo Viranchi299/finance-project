@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- <link rel="stylesheet" href="../static/main.css" /> -->
+    <title>Stock App</title>
+  </head>
+  <body>
+    <h1>Stock Data</h1>
+    <input type="text" id="ticker" value="" />
+    <button id="refresh-button">Plot Graph</button>
+    <div id="chartdiv"></div>
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+  </body>
+</html>
+
+{% endblock %}

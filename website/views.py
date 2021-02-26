@@ -39,6 +39,13 @@ def finance_landing():
         pass
     return render_template("finance.html")
 
+#alternative using API and amCharts
+@views.route('/amcharts', methods=['POST', 'GET'])
+def amCharts():
+    if request.method == 'POST':
+        pass
+    return render_template("amcharts.html")    
+
 
 @views.route('/submittedfinance', methods=['POST'])
 def get_ticker():

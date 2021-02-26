@@ -1,6 +1,20 @@
 footer {
-    /* text-align: center; */
-    padding: 3px;
-    background-color: rgb(236, 79, 27);
-    color: white;
-  }
+  /* text-align: center; */
+  padding: 3px;
+  background-color: rgb(236, 79, 27);
+  color: white;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap");
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  margin-left: 0rem;
+}
+
+#chartdiv {
+  width: 50%;
+  height: 500px;
+  margin-left: 0rem;
+}

@@ -14,7 +14,10 @@
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       crossorigin="anonymous"
     />
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"> -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
 
     <title>{% block title %}Home{% endblock %}</title>
   </head>
@@ -32,6 +35,9 @@
         <div class="navbar-nav">
           <a class="nav-item nav-link" id="home" href="/">Home</a>
           <a class="nav-item nav-link" id="login" href="/finance">Finance</a>
+          <a class="nav-item nav-link" id="amcharts" href="/amcharts"
+            >amCharts</a
+          >
         </div>
       </div>
     </nav>
