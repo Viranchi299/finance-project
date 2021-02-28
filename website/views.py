@@ -20,6 +20,8 @@ from .models import Note
 views = Blueprint('views', __name__)
 WEEKLY_TRADING_DAYS = 5
 YEARLY_TRADING_DAYS = 250
+
+
 # urllib.request.urlretrive()
 
 
@@ -39,12 +41,13 @@ def finance_landing():
         pass
     return render_template("finance.html")
 
-#alternative using API and amCharts
+
+# alternative using API and amCharts
 @views.route('/amcharts', methods=['POST', 'GET'])
 def amCharts():
     if request.method == 'POST':
         pass
-    return render_template("amcharts.html")    
+    return render_template("amcharts.html")
 
 
 @views.route('/submittedfinance', methods=['POST'])
@@ -55,11 +58,11 @@ def get_ticker():
         flash('Please enter a valid ticker')
         return redirect(url_for('views.finance_landing'))
     ticker_props = yf.Ticker(ticker)
-    # print(ticker_props)
-    # print(ticker_props.info)
-    # print(ticker_props.financials)
-    # print(ticker_props.recommendations)
-    # print(ticker_props.calendar)
+    print(ticker_props)
+    print(ticker_props.info)
+    print(ticker_props.financials)
+    print(ticker_props.recommendations)
+    print(ticker_props.calendar)
     yf.pdr_override()  # <== that's all it takes :-)
 
     # download dataframe
@@ -93,8 +96,18 @@ def get_ticker():
 
     return render_template("submittedfinance.html",
                            disp_data=disp_data.to_html(classes=["table-bordered", "table-striped", "table-hover"]),
-                           plot_url=plot_url,
-                           ticker=ticker.upper())
+                           plot_url=plot_url, ticker=ticker.upper(), company=ticker_props.info['longName'],
+                           business_summary=ticker_props.info['longBusinessSummary'],
+                           marketCap=ticker_props.info['marketCap'],
+                           regularMarketOpen=ticker_props.info['regularMarketOpen'],
+                           dayHigh=ticker_props.info['dayHigh'],
+                           regularMarketPreviousClose=ticker_props.info['regularMarketPreviousClose'],
+                           averageVolume=ticker_props.info['averageVolume'],
+                           fiftyTwoWeekHigh=ticker_props.info['fiftyTwoWeekHigh'],
+                           beta=ticker_props.info['beta'],
+                           forwardPE=ticker_props.info['forwardPE'],
+                           floatShares=ticker_props.info['floatShares']
+    )
 
 
 @views.route('/delete-note', methods=['POST'])
