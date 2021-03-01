@@ -108,4 +108,7 @@ async function spawnGraph() {
   chart.cursor = new am4charts.XYCursor();
   chart.cursor.behavior = "zoomY";
   chart.cursor.lineX.disabled = true;
+
+  var test = document.getElementById("mydiv").getAttribute("test-array");
+  console.log(test);
 }

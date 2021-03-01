@@ -1,5 +1,5 @@
-{% extends "base.html" %} {% block title %}AmCharts{% endblock %} {% block content
-%}
+{% extends "base.html" %} {% block title %}AmCharts{% endblock %} {% block
+content %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,6 +14,7 @@
     <input type="text" id="ticker" value="" />
     <button id="refresh-button">Plot Graph</button>
     <div id="chartdiv"></div>
+    <div id="mydiv" test-array="{{ test_array }}">...</div>
     <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
     <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
     <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>

@@ -47,7 +47,8 @@ def finance_landing():
 def amCharts():
     if request.method == 'POST':
         pass
-    return render_template("amcharts.html")
+    test_array = [1,2,3,4]  #test to try pass into amcharts page via index.js  
+    return render_template("amcharts.html", test_array=test_array)
 
 
 @views.route('/submittedfinance', methods=['POST'])
