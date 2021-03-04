@@ -1,21 +1,11 @@
-import base64
-import io
 import json
-import urllib
-
-import PIL
-import matplotlib.pyplot as plt
-import mplfinance as mpf
-import yfinance as yf
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from flask_login import current_user
-# yahoo finance / pandas
-from pandas_datareader import data as pdr
 
 from . import db
 from .models import Note
-
 # file stuff
+from .ticker_parsing import get_ticker_data, plot_ticker_data
 
 views = Blueprint('views', __name__)
 WEEKLY_TRADING_DAYS = 5
@@ -47,68 +37,27 @@ def finance_landing():
 def amCharts():
     if request.method == 'POST':
         pass
-    test_array = [1,2,3,4]  #test to try pass into amcharts page via index.js  
+    test_array = [1, 2, 3, 4]  # test to try pass into amcharts page via index.js
     return render_template("amcharts.html", test_array=test_array)
 
 
 @views.route('/submittedfinance', methods=['POST'])
-def get_ticker():
-    ticker = request.form.get('ticker')
-    # validate ticker based on string properties
-    if not ticker:
-        flash('Please enter a valid ticker')
-        return redirect(url_for('views.finance_landing'))
-    ticker_props = yf.Ticker(ticker)
-    print(ticker_props)
-    print(ticker_props.info)
-    print(ticker_props.financials)
-    print(ticker_props.recommendations)
-    print(ticker_props.calendar)
-    yf.pdr_override()  # <== that's all it takes :-)
-
-    # download dataframe
-    # data = pdr.get_data_yahoo("SPY", start="2017-01-01", end="2017-04-30")
-    data = pdr.get_data_yahoo(ticker)
-    # if no data on this ticker is available (or it's invalid) go back to finance page.
-    if data.empty:
-        flash('Please enter a valid ticker')
+def display_ticker_data():
+    ticker_name = request.form.get('ticker')
+    ticker_data = get_ticker_data(ticker_name)
+    if not ticker_data:
+        flash('No data for this ticker')
         return redirect(url_for('views.finance_landing'))
 
+    trading_data, ticker_props = ticker_data['trading_data'], ticker_data['properties']
     # show this on html template, use DF for plotting 2 weeks of trading data.
-    disp_data = data.tail(WEEKLY_TRADING_DAYS * 2)
+    disp_data = trading_data.tail(WEEKLY_TRADING_DAYS * 2)
 
-    print("successful")
-    # print(disp_data)
-
-    # create image and pass to submitted_finance html template.
-    img = io.BytesIO()
-    plt.figure(figsize=(10, 10))
-    # plt.plot(data.index, data['Close'])
-    # plt.xlabel("date")
-    # plt.ylabel("$ price")
-    mpf.plot(data.tail(YEARLY_TRADING_DAYS), type='candle', volume=True,
-             savefig=img,
-             title=f'\n{ticker.upper()} Historical Data',
-             ylabel_lower='Shares\nTraded')
-    # plt.title(f'{ticker} Stock Price:')
-    # plt.savefig(img, format='png')
-    img.seek(0)
-    plot_url = base64.b64encode(img.getvalue()).decode()
-
+    # get plot for trading data
+    plot_image = plot_ticker_data(trading_data, ticker_name)
     return render_template("submittedfinance.html",
                            disp_data=disp_data.to_html(classes=["table-bordered", "table-striped", "table-hover"]),
-                           plot_url=plot_url, ticker=ticker.upper(), company=ticker_props.info['longName'],
-                           business_summary=ticker_props.info['longBusinessSummary'],
-                           marketCap=ticker_props.info['marketCap'],
-                           regularMarketOpen=ticker_props.info['regularMarketOpen'],
-                           dayHigh=ticker_props.info['dayHigh'],
-                           regularMarketPreviousClose=ticker_props.info['regularMarketPreviousClose'],
-                           averageVolume=ticker_props.info['averageVolume'],
-                           fiftyTwoWeekHigh=ticker_props.info['fiftyTwoWeekHigh'],
-                           beta=ticker_props.info['beta'],
-                           forwardPE=ticker_props.info['forwardPE'],
-                           floatShares=ticker_props.info['floatShares']
-    )
+                           plot_image=plot_image, ticker=ticker_name.upper(), **ticker_props.info)
 
 
 @views.route('/delete-note', methods=['POST'])
