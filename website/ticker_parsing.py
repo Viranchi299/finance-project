@@ -1,11 +1,12 @@
 import base64
 import io
+
 import matplotlib.pyplot as plt
 import mplfinance as mpf
 import yfinance as yf
-from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 # yahoo finance / pandas
 from pandas_datareader import data as pdr
+yf.pdr_override()  # <== that's all it takes :-)
 
 WEEKLY_TRADING_DAYS = 5
 YEARLY_TRADING_DAYS = 250
@@ -19,26 +20,23 @@ returns:
 """
 
 
-def get_ticker_data(ticker: str):
+def get_ticker_data(ticker: str) -> {}:
     # validate ticker based on string properties
     if not ticker or (len(ticker) > TICKER_MAX_LENGTH):
         return None
-    try:
-        trading_data = pdr.get_data_yahoo(ticker)
-    except IOError:
-        print('Failed to get data for ticker.')
-        return None
-    ticker_props = yf.Ticker(ticker)
-    print(ticker_props)
-    print(ticker_props.info)
+    # make sure we can get trading data for ticker
+    if (trading_data := pdr.get_data_yahoo(ticker)).empty:
+        return {}
+    # print(ticker_props)
+    # print(ticker_props.info)
     # print(ticker_props.financials)
     # print(ticker_props.recommendations)
     # print(ticker_props.calendar)
-    yf.pdr_override()  # <== that's all it takes :-)
+
 
     # download dataframe
     # data = pdr.get_data_yahoo("SPY", start="2017-01-01", end="2017-04-30")
-    return {'properties': ticker_props, 'trading_data': trading_data}
+    return {'properties': yf.Ticker(ticker), 'trading_data': trading_data}
 
 
 def plot_ticker_data(trading_data, ticker_name):

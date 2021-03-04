@@ -13,7 +13,7 @@ class Test(TestCase):
     """
 
     def test_get_ticker_invalid(self):
-        self.assertIsNone(ticker_parsing.get_ticker_data('CCC'))
+        self.assertIsNone(ticker_parsing.get_ticker_data('ZZZZZZ'))
 
     """
     Valid ticker, should have dictionary filled with both ticker_props and trading data
