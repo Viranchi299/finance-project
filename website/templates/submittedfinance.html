@@ -4,11 +4,11 @@
     <br>
     <br>
     <br>
-    <h1 class="display-5">Stock Information about {{ company }}:</h1>
+    <h1 class="display-5">Stock Information about {{ longName }}:</h1>
     {#    <canvas id="myChart" width="400" height="150"></canvas>#}
     <div>
         <p class="lead">
-            {{ business_summary }}
+            {{ longBusinessSummary }}
         </p>
         <br/>
         <br/>
@@ -38,7 +38,7 @@
         <br/>
         <br/>
         <br/>
-        <img src="data:image/png;base64, {{ plot_url }}">
+        <img src="data:image/png;base64, {{ plot_image }}">
     </div>
     <br/>
     <br/>
