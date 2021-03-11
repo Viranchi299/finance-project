@@ -46,18 +46,24 @@ def display_ticker_data():
     ticker_name = request.form.get('ticker')
     ticker_data = get_ticker_data(ticker_name)
     if not ticker_data:
-        flash('No data for this ticker')
-        return redirect(url_for('views.finance_landing'))
+        flash('No data for this ticker', category='error')
+        return render_template("submittedfinance.html")
 
-    trading_data, ticker_props = ticker_data['trading_data'], ticker_data['properties']
-    # show this on html template, use DF for plotting 2 weeks of trading data.
-    disp_data = trading_data.tail(WEEKLY_TRADING_DAYS * 2)
-
-    # get plot for trading data
-    plot_image = plot_ticker_data(trading_data, ticker_name)
+    flash(f"Success! Retrieved information for {ticker_name}.", category='success')
     return render_template("submittedfinance.html",
-                           disp_data=disp_data.to_html(classes=["table-bordered", "table-striped", "table-hover"]),
-                           plot_image=plot_image, ticker=ticker_name.upper(), **ticker_props.info)
+                           disp_data=ticker_data['display_data'].to_html(
+                               classes=["table-bordered", "table-striped", "table-hover"]),
+                           plot_image=ticker_data['plot_image'], ticker=ticker_name.upper(),
+                           **ticker_data['properties'].info)
+
+
+@views.route('/portfolio', methods=['GET', 'POST'])
+def portfolio():
+    """
+    Portfolio page with watch list.
+    """
+
+    return render_template("portfolio.html")
 
 
 @views.route('/delete-note', methods=['POST'])

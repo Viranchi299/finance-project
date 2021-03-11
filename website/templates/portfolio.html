@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1 class="display-4">Portfolio</h1>
+        <p class="lead">Add your investments, track performance, and create your stocks watchlist.</p>
+    </div>
+    <br/>
+    <br/>
+    <img src={{ url_for('static', filename='images/SP500.png')}} width=800, height=800, quality=100 >
+    <label>
+        Perform a quick google search on any of your investments:
+        <input type="search" name="q" placeholder="google this">
+    </label>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+{% endblock %}
