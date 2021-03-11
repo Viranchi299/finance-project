@@ -6,18 +6,13 @@ import mplfinance as mpf
 import yfinance as yf
 # yahoo finance / pandas
 from pandas_datareader import data as pdr
+
 yf.pdr_override()  # <== that's all it takes :-)
 
 WEEKLY_TRADING_DAYS = 5
 YEARLY_TRADING_DAYS = 250
 TICKER_MAX_LENGTH = 4
 
-"""
-Args:
-    ticker: String inputted from user on finance.html route
-returns: 
-    Dictionary with ticker properties and pandas dataframe of last 252 days trading data
-"""
 
 
 def get_ticker_data(ticker: str) -> {}:
