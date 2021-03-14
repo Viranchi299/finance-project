@@ -17,11 +17,9 @@ TICKER_MAX_LENGTH = 4
 
 def get_ticker_data(ticker: str, num_weeks=2) -> {}:
     """
-    :Args:
-        ticker: String inputted from user on finance.html route
-        num_weeks: default is 2 weeks of trading data
-    :return:
-        Dictionary with ticker properties and pandas dataframe of last 252 days trading data
+    @param ticker: ticker name, should be retrieved from form
+    @param num_weeks: default is 2 weeks since planning to return 2 weeks of trading data
+    @return: dict with ticker attributes and pricing data, used to fill submittedfinance.html template
     """
     # validate ticker based on string properties
     if not ticker or (len(ticker) > TICKER_MAX_LENGTH) or (not ticker.isalpha()):
