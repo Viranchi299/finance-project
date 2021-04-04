@@ -1,4 +1,4 @@
-# Flask Web App Tutorial
+# Finance Web App Tutorial
 
 ## Setup & Installtion
 
